@@ -1,0 +1,16 @@
+package templates
+
+import "fmt"
+
+templ List(items []string) {
+	<ul>
+		for _, item := range items {
+			@itemLI(item)
+		}
+	</ul>
+}
+
+templ itemLI(i string) {
+	<li hx-swap="delete">{ i }{ "\t" }<i class="fa fa-remove" hx-post={ fmt.Sprintf("/delete-item?item=%s", i) } hx-trigger="click" hx-swap="delete" hx-target="closest li"></i></li>
+}
+
